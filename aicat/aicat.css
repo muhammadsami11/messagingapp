@@ -128,13 +128,18 @@ body {
     display: flex;
     align-items: center;
     padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
+    border:0.5px solid rgb(2, 0, 0);
     margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin-left:10px;
 }
 
 .chat-header img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
+    margin-left:10px;
+    margin-top:10px;
     border-radius: 50%;
 }
 
@@ -149,22 +154,25 @@ body {
     justify-content:space-between;
 }
 
-.chat-message {
+.chat-message{
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 10px;
-    max-width: 40%;
+    max-width: 70%;
    
     position: relative;
-.chat-message .timestamp {
-    position: absolute;
-bottom: 5px; /* Adjust for spacing inside the message box */
-right: 8px; /* Keep it near the right edge of the message box */
-font-size: 10px; /* Smaller font size for the timestamp */
-color: gray; }
+
 
 }
+.chat-message .timestamp {
+    position: relative;
+bottom: 5px; /* Adjust for spacing inside the message box */
+right: 5px;
+left: 5px;
 
+padding:5px;/* Keep it near the right edge of the message box */
+font-size: 10px; /* Smaller font size for the timestamp */
+color: rgb(161, 158, 158); }
 
 
 
@@ -173,19 +181,19 @@ color: gray; }
     border: 1px solid #ccc;
     display: flex;
     justify-content: space-between;
+    padding-left:20px;
 }
 .received{
     display: flex;
-    justify-content: space-around; 
-    
+    justify-content: space-between; 
     color: white;
     background-color: black;
     align-self: flex-end;
 }
 
 .sidebar-logo2 img {
-    height: 35px;
-    width: 35px;
+    height: 45px;
+    width: 45px;
 }
 
 .sidebar-bottom img {
