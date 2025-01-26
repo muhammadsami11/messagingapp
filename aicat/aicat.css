@@ -10,6 +10,7 @@ body {
     width: 5%;
     background-color: #F1FAEE;
     display: flex;
+    flex:0;
     flex-direction: column;
     align-items: center;
     position: relative;
@@ -40,6 +41,7 @@ body {
 }
 /* Chat List Section */
 .chat-list {
+    flex:1;
     width: 45%;
     background-color: #6BAFD8;
     display: flex;
@@ -48,6 +50,7 @@ body {
     box-sizing: border-box;
     overflow-y: auto;
 }
+ 
 .chat-list-header img{
     width: 40px;
     height: 40px;
@@ -73,6 +76,7 @@ body {
 }
 
 .chat-item {
+   
     background-color: #002514;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
@@ -115,15 +119,55 @@ body {
 
 
 
-/* Active Chat Section */
-.chat-section {
-    flex: 1;
+
+.sidebar-logo2 img {
+    height: 45px;
+    width: 45px;
+}
+
+.sidebar-bottom img {
+    height: 35px;
+    width: 35px;
+}
+.setting-div{
+    flex:2;
+}
+.chat-list, .setting-div {
+    display: none;
+}
+#message:checked ~ .chat-list {
     display: flex;
+    flex-direction: column;
+}
+#setting:checked ~ .setting-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-section {
+    flex:2;
+   
+  
+    display: none;
     flex-direction: column;
     padding: 20px;
     background-color: #F7FFF5;
 }
-
+#chat1:checked ~ .chat1 {
+    display: block;
+}
+#chat2:checked ~ .chat2 {
+    display: block;
+}
+#chat3:checked ~ .chat3 {
+    display: block;
+}
+#chat4:checked ~ .chat4 {
+    display: block;
+}
+#chat5:checked ~ .chat5 {
+    display: block;
+}
 .chat-header {
     display: flex;
     align-items: center;
@@ -166,12 +210,12 @@ body {
 }
 .chat-message .timestamp {
     position: relative;
-bottom: 5px; /* Adjust for spacing inside the message box */
+bottom: 5px;
 right: 5px;
 left: 5px;
 
-padding:5px;/* Keep it near the right edge of the message box */
-font-size: 10px; /* Smaller font size for the timestamp */
+padding:5px;
+font-size: 10px; 
 color: rgb(161, 158, 158); }
 
 
@@ -189,14 +233,4 @@ color: rgb(161, 158, 158); }
     color: white;
     background-color: black;
     align-self: flex-end;
-}
-
-.sidebar-logo2 img {
-    height: 45px;
-    width: 45px;
-}
-
-.sidebar-bottom img {
-    height: 35px;
-    width: 35px;
 }
