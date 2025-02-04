@@ -122,7 +122,8 @@
         xml.send(data_string);
     }
     function handle_result(result) {
-    try {
+   console.log(result);
+        try {
         var data = JSON.parse(result);
         var errorDiv = _("error");
 
@@ -133,6 +134,7 @@
         if (data.data_type == "info") {
             errorDiv.innerHTML = "Your profile has been created.";
             errorDiv.style.display = "none";
+            window.location = "http://localhost/Project/Loginpage/login.php";
         } else {
             errorDiv.innerHTML = data.message;
             errorDiv.style.display = "block";

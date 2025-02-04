@@ -42,7 +42,7 @@
                     <button type="button" id="submit">Login</button>
                 </div>
                 <div class="signup">
-                    Don't have an account? <a href="#">Sign up</a>
+                    Don't have an account? <a href="http://localhost/Project/Signup/signup.php">Sign up</a>
                 </div>
             </form>
             <div id="error" style="display:none;"></div> <!-- Added error div -->
