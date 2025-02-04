@@ -30,7 +30,11 @@
 
                 </label>
             </div>
+
         </div>
+        <div class="logout">
+        <button type="button" id="logout" value="logout">Logout</button>
+    </div>
 
     </div>
 
@@ -239,36 +243,81 @@
             <div id="email">
                 Email
             </div>
-            <div id="Password">
+            <div id="password">
                 Password
             </div>
         </div>
 
     </div>
+   
     <script>
-        function_(element)
+        function _(element)
         {
             return document.getElementById(element);
         }
-
+        var logout_button = _("logout");
+        logout_button.addEventListener("click", logout_user);
+         
         function get_data(find, type) {
-            var xml = new XMLHTTPRequest();
+            var xml = new XMLHttpRequest();
             xml.onload = function () {
-                if (xml.readystate == 4 || xml.status == 200) {
-                    handle_result(xml.responseText);
+                if (xml.readyState == 4 || xml.status == 200) {
+                    handle_result(xml.responseText,type);
                 }
-
             }
             var data = {};
             data.find = find;
             data.data_type = type;
             data = JSON.stringify(data);
-            xml.open("POST", "api.php", true);
-            xml.send(data);
+           
+         xml.open("POST", "http://localhost/Project/Signup/api.php", true);
+         xml.setRequestHeader("Content-Type", "application/json");
+         xml.send(data);
+
         }
         function handle_result(result, type) {
-            alert(result);
+    console.log(result); // This will show the JSON response
+    if (result.trim() !== "") {
+        try {
+            var obj = JSON.parse(result);
+            console.log(obj); // Log the object to check the structure
+
+            if (typeof(obj.logged_in) !== "undefined" && !obj.logged_in) {
+                console.log("Redirecting to /Project/loginpage/login.php...");
+            setTimeout(() => {
+                window.location.href = "http://localhost/Project/loginpage/login.php";
+            }, 2000);
+            } else {
+                switch (obj.data_type) {
+                    case "user_info":
+                        var username = _("username");
+                        var email = _("email");
+                        var password = _("password");
+
+                        // Make sure the values are being set correctly
+                        username.innerHTML = obj.userName || "No username found";
+                        email.innerHTML = obj.Email || "No email found";
+                        password.innerHTML = obj.password || "No password found";
+                        console.log(password);
+                        break;
+                    default:
+                        console.log("No data type found");
+                        break;
+                }
+            }
+        } catch (e) {
+            console.log("JSON Parsing Error:", e);
         }
+    } else {
+        console.log("An error occurred");
+    }
+}
+
+        function logout_user() {
+            get_data({}, "logout");
+        }
+        get_data({}, "user_info");
+
     </script>
 
 
