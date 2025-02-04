@@ -255,8 +255,18 @@
         {
             return document.getElementById(element);
         }
+        var label_contacts = _("label_contacts");
+        label_contacts.addEventListener("click", get_contacts);
+        
+        var label_chats = _("label_chats");
+        label_chats.addEventListener("click", get_contacts);
+        
+        var label_settings = _("label_settings");
+        label_settings.addEventListener("click", get_contacts);
+        
         var logout_button = _("logout");
         logout_button.addEventListener("click", logout_user);
+        
          
         function get_data(find, type) {
             var xml = new XMLHttpRequest();
@@ -300,6 +310,30 @@
                         password.innerHTML = obj.password || "No password found";
                         console.log(password);
                         break;
+                        case"contacts":
+                            var chat-list = _("chat-list" list);
+        
+
+                        // Make sure the values are being set correctly
+                        chat-list.innerHTML = obj.message || "No contact found";
+                        
+                        break;  
+                        case"chats":
+                            var chat-list = _("chat-list" list);
+        
+
+                        // Make sure the values are being set correctly
+                        chat-list.innerHTML = obj.message || "No contact found";
+                        
+                        break;  
+                        case"settings":
+                            var chat-list = _("chat-list" list);
+        
+
+                        // Make sure the values are being set correctly
+                        chat-list.innerHTML = obj.message || "No contact found";
+                        
+                        break;    
                     default:
                         console.log("No data type found");
                         break;
@@ -317,6 +351,19 @@
             get_data({}, "logout");
         }
         get_data({}, "user_info");
+        funtion get_contacts(e)
+        {
+            get_data({}, "contacts"); 
+        }
+        funtion get_chhats(e)
+        {
+            get_data({}, "chats"); 
+        }
+        funtion get_setings(e)
+        {
+            get_data({}, "settings"); 
+        }
+
 
     </script>
 

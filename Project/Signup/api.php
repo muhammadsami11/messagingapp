@@ -35,6 +35,20 @@ else if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type=="user_info")
 { 
     include("D:/Software/xamp/htdocs/Project/includes_signup/user_info.php");
     
+}else if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type=="contacts ")
+{ 
+    include("D:/Software/xamp/htdocs/Project/includes_signup/contacts.php");
+    
+}
+}else if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type=="chats ")
+{ 
+    include("D:/Software/xamp/htdocs/Project/includes_signup/chats.php");
+    
+}
+}else if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type=="settings ")
+{ 
+    include("D:/Software/xamp/htdocs/Project/includes_signup/settings.php");
+    
 }
 
 ?>
