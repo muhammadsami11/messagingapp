@@ -23,6 +23,13 @@ if (!isset($_SESSION['userid']) || empty($_SESSION['userid'])) {
  {  // Clear any unwanted output before sending JSON
     $result=$result[0];
     $result->data_type="user_info";
+    // check if image exists
+    $image="http://localhost/Project/aicat/3.jpg";
+    if(!empty($result->image))
+    {
+        $image=$result->image;
+    }  
+    $result->image=$image;
     echo json_encode($result);}
     else{
     $info->message="wrong id";

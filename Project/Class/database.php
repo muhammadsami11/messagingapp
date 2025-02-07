@@ -21,7 +21,19 @@ class Database {
         return false;
         
     }
-
+    public function write($query, $data_array = [])
+    {
+        $statement = $this->con->prepare($query);
+    
+        if (!empty($data_array)) {
+            foreach ($data_array as $key => $value) {
+                $statement->bindValue(":$key", $value);
+            }
+        }
+    
+        return $statement->execute();
+    }
+    
     //read from db
     public function read($query, $data_array = [])
     {
