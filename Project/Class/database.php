@@ -38,12 +38,6 @@ class Database {
     public function read($query, $data_array = [])
     {
         $statement = $this->con->prepare($query);
-        
-        // Debugging: Print the query and data_array to check their consistency
-        // echo "Query: $query<br>";
-        //echo "Data Array: " . print_r($data_array, true) . "<br>";
-    
-        // Bind parameters explicitly
         if (!empty($data_array)) {
             foreach ($data_array as $key => $value) {
                 // Bind each parameter correctly
@@ -61,6 +55,27 @@ class Database {
         return false;
     }
     
+        //read from db
+        public function get_user($userid)
+        {   $arr['userid']=$userid;
+            $query="select * from signup where userid = :userid limit 10";
+            $statement = $this->con->prepare($query);
+
+        
+            // Execute the query
+            $check = $statement->execute($arr);
+        
+            if ($check) {
+                $result = $statement->fetchAll(PDO::FETCH_OBJ);
+                if (is_array($result) && count($result) > 0)
+                {
+                    return $result[0];
+                }
+                return false;
+            }
+            return false;
+        }
+        
 
 
     

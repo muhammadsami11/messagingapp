@@ -2,9 +2,9 @@
 ini_set('session.gc_maxlifetime', 3600);  // 1 hour session timeout
 session_set_cookie_params(3600);  // Ensures cookies are kept for the session
 session_start();
-
+$info = (object)[];
 if (!isset($_SESSION['userid'])) {
-    $info = (object)[];
+    
     if (isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type != "login" && $DATA_OBJ->data_type != "signup") {
         $info->logged_in = false;
         echo json_encode($info);
@@ -45,17 +45,68 @@ if (isset($DATA_OBJ->data_type)) {
         case "settings":
             include("D:/Software/xamp/htdocs/Project/person/settings.php");
             break;
+        case "chats_refresh":
+                include("D:/Software/xamp/htdocs/Project/person/chats.php");
+                break;
         case "chats":
             include("D:/Software/xamp/htdocs/Project/person/chats.php");
             break;
+         
         case "save_settings":
             include("D:/Software/xamp/htdocs/Project/includes_signup/save_setting.php");
             break;
+        case "send_message":
+            include("D:/Software/xamp/htdocs/Project/includes_signup/send_message.php");
+                break;
         default:
             echo json_encode(["error" => "Invalid data type"]);
             break;
     }
 } else {
     echo json_encode(["error" => "Missing data_type"]);
+}
+function message_left($data,$row)
+{   $image="http://localhost/Project/aicat/2.jpg";
+    if(!empty($row->image))
+    {
+        $image=$row->image;
+    }  
+    return  "
+    <div class='message_left' id='message_left' userid=' $row->userid' >
+    <div></div>
+    <img src='$image' alt='Profile' >
+    <b>$row->fullName<br><b>
+    $data->message<br>
+    <span style='font-size: 12px color: green'>".date("jS M Y H:i:s a",strtotime($data->date))."</span>
+    </div>
+    <br>";
+    }
+function message_right($data, $row)
+{   $image="http://localhost/Project/aicat/2.jpg";
+    if(!empty($row->image))
+    {
+        $image=$row->image;
+    }  
+    return "
+    <div class='message_right' id='message_right' userid=' $row->userid' >
+    <div></div>
+    <img src='$image' alt='Profile' >
+    <b>$row->fullName<br><b>
+    $data->message<br>
+    <span style='font-size: 12px color: green'>".date("jS M Y H:i:s a",strtotime($data->date))."</span>
+    </div>";
+}
+function message_controls()
+{
+    return "
+    </div>
+        <!-- Input Bar Stays at Bottom of Active Chat -->
+        <div class='chat_input_container'>
+        <label for='file'><img src='file.png'></label>
+        <input type='file' id='file' name='file' style='display:none;'>
+        <input type='text' id='chat_input' onkeyup='enter_pressed(event)' placeholder='Type your message'>
+        <input type='button' id='send_button' value='Send' onclick='send_message(event)'>
+        </div>
+    </div>";
 }
 ?>

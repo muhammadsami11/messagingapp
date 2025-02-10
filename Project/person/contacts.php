@@ -41,7 +41,8 @@ if(!empty($row->image))
     $image=$row->image;
 }  
 $mydata .= "
-<div class='contacts-list' onclick='start_chats(event)' style='display: inline-block; margin-right: 20px;  text-align: left;'>
+
+<div class='contacts-list' userid='$row->userid' onclick='start_chat(event)' style='display: inline-block; margin-right: 20px;  text-align: left;'>
 <img src='$image' alt='Profile' style='width: 100px; height: 100px; border-radius: 50%;'>
     <br>  $row->fullName
     </div>";}}
