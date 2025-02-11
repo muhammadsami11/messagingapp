@@ -9,15 +9,15 @@
     <div class="card">
         <div class="search">
             <input type="text" placeholder="Enter city, country code (e.g., Lahore, PK)" spellcheck="false">
-            <button><img src="./" alt="Search"></button>
+            <button><img src="search.png" alt="Search"></button>
         </div>
         <div class="weather">
-            <img src="" class="weather-icon" alt="Weather Icon">
+            <img src=""D:\Users\uzair\Downloads\New folder\images"/default.png" class="weather-icon" alt="Weather Icon">
             <h1 class="temp">--°C</h1>
             <h2 class="city">---</h2>
             <div class="details">
                 <div class="col">
-                    <img src="/wheatherapp/90.png" alt="Humidity Icon">
+                    <img src="humidity.png" alt="Humidity Icon">
                     <div>
                         <p class="humidity">--%</p>
                         <p>Humidity</p>
@@ -39,6 +39,18 @@
         const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
         const searchBox = document.querySelector(".search input");
         const searchBtn = document.querySelector(".search button");
+        const weatherIcon = document.querySelector(".weather-icon");
+
+        // Weather condition to image mapping
+        const weatherImages = {
+            "Clear": "sunny.png",
+            "Clouds": "cloudy.png",
+            "Rain": "rainy.png",
+            "Drizzle": "drizzle.png",
+            "Thunderstorm": "stormy.png",
+            "Snow": "snow.png",
+            "Mist": "mist.png"
+        };
 
         async function checkWeather(city) {
             try {
@@ -54,11 +66,16 @@
                 document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
                 document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
 
-                // Set weather icon dynamically
-                const weatherIcon = document.querySelector(".weather-icon");
-                const iconCode = data.weather[0].icon;
-                weatherIcon.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+                // Get the weather condition from API
+                const weatherCondition = data.weather[0].main;
+                console.log("Weather Condition:", weatherCondition);
 
+                // Set weather image based on condition
+                if (weatherImages[weatherCondition]) {
+                    weatherIcon.src = `images/${weatherImages[weatherCondition]}`;
+                } else {
+                    weatherIcon.src = "images/default.png"; // Fallback image
+                }
             } catch (error) {
                 alert(error.message);
             }
