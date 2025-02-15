@@ -1,125 +1,78 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7fc;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(90deg, #0093E9, #80D0C7);
+}
+.container {
+    display: flex;
+    width: 50%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.left-section {
+    width: 40%;
+    background: #007bff;
+    color: white;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
 }
-
-div.heading {
-    text-align: center;
-    margin-bottom: 30px;
+.right-section {
+    width: 60%;
+    padding: 30px;
 }
-
 h1 {
-    font-size: 36px;
+    color: black;
+    padding-top: 75px;
+    text-align: center;
+}
+/* label {
     font-weight: bold;
     color: #333;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-
-
-div.form {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    width: 100%;
-    max-width: 500px;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-}
-
-div.form:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin-top: 10px;
+} */
+label input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+    vertical-align: middle;
 }
 
 label {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 8px;
-    display: inline-block;
+    display: flex;
+    align-items: center;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="password"],
-input[type="date"],
-input[type="file"] {
+input, button {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
+    padding: 10px;
+    margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 14px;
-    background-color: #f9f9f9;
-    transition: border 0.3s, background-color 0.3s;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-input[type="password"]:focus,
-input[type="date"]:focus {
-    border-color: #3498db;
-    background-color: #eaf5ff;
-    outline: none;
-}
-
-input[type="file"] {
-    padding: 6px;
-}
-
-button[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    background-color: #3498db;
+button {
+    background: linear-gradient(90deg, #0093E9, #80D0C7);
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.2s;
 }
-
-button[type="submit"]:hover {
-    background-color: #2980b9;
+button:hover {
     transform: translateY(-2px);
 }
-
-input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-a {
-    color: #3498db;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-@media (max-width: 600px) {
-    div.form {
-        padding: 20px;
-        width: 90%;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
+.form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }

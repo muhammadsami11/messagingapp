@@ -20,42 +20,47 @@
 </head>
 
 <body>
-    <div class="heading">
-        <h1>Sign Up</h1>
+    <div class="container">
+        <div class="left-section">
+            <h2>Welcome to ChimeChat</h2>
+            <p>ChimeChat is a fast, secure, and reliable messaging app that lets you connect with friends and family instantly. Enjoy seamless communication with end-to-end encryption, real-time notifications, and an intuitive user experience.</p>
+        </div>
+        <div class="right-section">
+            <div class="heading">
+                <h1>Sign Up</h1>
+            </div>
+            <div id="error"></div>
+            <div class="form">
+                <form id="myForm">
+                    <label for="full_name">Full Name:</label>
+                    <input type="text" id="full_name" name="full_name" placeholder="Enter Your Full Name" required>
+                    
+                    <label for="username">User Name:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter Unique User Name" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="@gmail.com" required>
+                    
+                    <label for="date">Date of Birth:</label>
+                    <input type="date" id="date" name="date" required>
+                    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Create Strong Password" required>
+                    
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                    
+                    <label>
+                        <input type="checkbox" name="agree" required> I agree to the <a href="#">Terms & Conditions</a>
+                    </label>
+               
+                    <button type="submit" id="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div id="error">
-      
-    </div>
-    <div class="form">
-        <form id="myForm">
-
-
-            <label for="full_name">Full Name:</label><br>
-            <input type="text" id="full_name" name="full_name" placeholder="Enter Your Full Name" required><br>
-
-            <label for="username">User Name:</label><br>
-            <input type="text" id="username" name="username" placeholder="Enter Unique User Name" required><br>
-
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" placeholder="@gmail.com" required><br>
-
-            <label for="date">Date of Birth:</label><br>
-            <input type="date" id="date" name="date" required><br>
-
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" placeholder="Create Strong Password" required><br>
-
-            <label for="confirm_password">Confirm Password:</label><br>
-            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password"
-                required><br><br>
-
-            <label>
-                <input type="checkbox" name="agree" required> I agree to the <a href="#">Terms & Conditions</a>
-            </label><br><br>
-
-            <button type="submit" id="submit">Sign Up</button>
-        </form>
-        <script>
+</body>
+<script>
     function _(element) {
         return document.getElementById(element);
     }
