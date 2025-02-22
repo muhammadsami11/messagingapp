@@ -1,0 +1,19 @@
+POST Data: Array
+(
+    [data_type] => send_image
+    [userid] => 19532
+)
+
+FILES Data: Array
+(
+    [file] => Array
+        (
+            [name] => 3.jpg
+            [type] => image/jpeg
+            [tmp_name] => D:\Software\xamp\tmp\phpCBC8.tmp
+            [error] => 0
+            [size] => 6664
+        )
+
+)
+

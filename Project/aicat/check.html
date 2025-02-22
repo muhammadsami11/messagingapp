@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+     body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+        }
+
+        /* Flexbox container for sections */
+        .chat-container {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+            transition: 0.3s ease;
+        }
+        .chat-list, .contacts-section, .settings-section {
+        
+        background: #f8f9fa;
+        padding: 20px;
+        display: none; /* All hidden initially */
+        transition: 0.3s ease;
+       
+    }
+    .sidebar {
+    flex:1;
+    width: 8%;
+    background: white;
+   
+    display: flex;
+  
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 147, 233, 0.5);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  
+        }
+
+        .sidebar-logo img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+            margin-left:9px;
+            cursor: pointer;
+        }
+        .sidebar-logo-image img {
+            margin-top:10px;
+            margin-bottom:20px;
+            width: 70px;
+            height: 70px;
+         
+            
+        }
+        .sidebar-setting img{
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .sidebar-bottom {
+            margin-bottom: 20px;
+
+        }
+
+        .logout button {
+            background:linear-gradient(90deg, #0093E9, #80D0C7);
+            color: rgb(252, 249, 249);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            width:80px;
+            border-radius: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:20px;
+            height:50px;
+            text-align: center;
+        }
+        .chat-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .chat-list-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        /* Contacts Section */
+        #contacts-list img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 10px;
+        }
+
+        #contacts-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #active_contact {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #eee;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        #active_contact img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* Chat Messages */
+        #chatmessage {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        #chat_message_child {
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 10px;
+            height: calc(100vh - 200px); /* Adjust based on your layout */
+        }
+
+        #message_left, #message_right {
+            max-width: 70%;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        #message_left {
+            background-color: #e1ffc7;
+            align-self: flex-start;
+        }
+
+        #message_right {
+            background-color: #f1f1f1;
+            align-self: flex-end;
+        }
+
+        #message_left #prof_img, #message_right #prof_img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* Trash and Icons in Messages */
+        #message_left #trash, #message_right #trash {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+
+        #message_left div img, #message_right div img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin: 0;
+        }
+
+        #message_left div, #message_right div {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        /* Chat Input Container */
+        .chat_input_container {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #fff;
+            border-top: 1px solid #ccc;
+            position: sticky;
+            bottom: 0;
+        }
+
+        .chat_input_container input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .chat_input_container input[type="button"] {
+            padding: 10px 20px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* File Upload Button */
+        .chat_input_container label {
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .chat_input_container label img {
+            width: 30px;
+            height: 30px;
+        }
+       
+
+        /* Responsive Styles */
+     
+
+      
+        
+</style>
+<body>
+     <!-- Sidebar Section -->
+     <div class="sidebar">
+        <div class='leftsidebar'>
+            <div class="sidebar-logo-image">
+                <img src="6.png" alt="Logo" id="logo">
+            </div>
+            <div class="sidebar-logo">
+                <label id="label_contacts"> <img src="contact.png" alt="Contacts"></label>
+            </div>
+            <div class="sidebar-logo">
+                <label id="label_message"><img src="8.png" alt="Chats"></label>
+            </div>
+            <div class="sidebar-logo">
+                <label id="label_weather"><img src="weather.png" alt="Chats"></label>
+            </div>
+            <div class="sidebar-logo">
+                <label id="label_planning"><img src="8.png" alt="Chats"></label>
+            </div>
+            <div class="sidebar-logo">
+                <label id="label_fitness"><img src="8.png" alt="Chats"></label>
+            </div>
+        </div>
+        <div class='sidebar-bottom'>
+            <div class="sidebar-setting">
+                <label id="label_setting"> <img src="7.png" alt="Settings"></label>
+            </div>
+        </div>
+        <div class="logout">
+            <button type="button" id="logout">Logout</button>
+        </div>
+    </div>
+
+    <!-- Chat Container (Flexbox Layout) -->
+    <div class="chat-container" id="chat_container">
+        <!-- Chat List Section -->
+        <div class="chat-list active" id="chat-list">
+            <div class="chat-list-header">
+                <h1>Chats</h1>
+               <!-- <img src="search.png">
+                <input type="text" placeholder="Search here"> -->
+            </div>
+        </div>
+    <div class="chatmessage" id="chatmessage" ></div>
+        <!-- Contacts Section (Initially Hidden) -->
+        <div class="contacts-section" id="contacts-section">
+           
+          
+        </div>
+
+        <!-- Settings Section (Initially Hidden) -->
+        <div class="settings-section" id="settings-section">
+            <h2>Settings</h2>
+            <p>Settings will be displayed here.</p>
+        </div>
+    </div>
+
+    <div id="user_info">
+        <h2>Profile</h2>
+        <img id="profile_image" src="5.jpg" width=100px; height= 80px; alt="Profile">
+        <div id="information">
+            <div id="username">Username</div>
+            <div id="email">Email</div>
+        </div>
+    </div>
+    <script>
+        var CURRENT_USER_ID = "";
+        var SEEN_STATUS = false;
+    
+        function handle_result(result, type) {
+            console.log(result);
+            try {
+                if (!result.trim()) {
+                    throw new Error("Empty response from server");
+                }
+                var chatmessage = _("chatmessage");
+                chatmessage.style.overflow = "visible";
+                var obj = JSON.parse(result);
+    
+                if (obj.logged_in === false) {
+                    setTimeout(() => {
+                        window.location.href = "http://localhost/Project/loginpage/login.php";
+                    }, 2000);
+                } else {
+                    switch (type) {
+                        case "user_info":
+                            _("username").innerText = obj.userName || "No username found";
+                            _("email").innerText = obj.Email || "No email found";
+                            _("profile_image").src = obj.image;
+                            break;
+    
+                        case "chats_refresh":
+                            SEEN_STATUS = false;
+    
+                            var chat_message_child = _("chat_message_child");
+    
+                            // Get the last saved scroll position
+                            var savedScroll = sessionStorage.getItem("chat_scroll");
+                            
+                            chat_message_child.innerHTML = obj.messages;
+    
+                            // Restore scroll position if available
+                            if (savedScroll) {
+                                chat_message_child.scrollTop = parseInt(savedScroll, 10);
+                            }
+                            break;
+    
+                        case "contacts":
+                            var contactsList = _("contacts-section");
+                            contactsList.innerHTML = obj.message || "<p>No contacts found</p>";
+                            chatmessage.style.overflow = "hidden";
+                            break;
+    
+                        case "chats":
+                            SEEN_STATUS = false;
+        var chatList = _("chat-list");
+        var chat_message = _("chatmessage");
+    
+        console.log("Received chats data:", obj); // Debugging
+    
+        if (obj.user) {
+            chatList.innerHTML = obj.user;
+        } else {
+            chatList.innerHTML = "<p>No chats found</p>";
+        }
+    
+        if (obj.messages) {
+            chat_message.innerHTML = obj.messages;
+        } else {
+            chat_message.innerHTML = "<p>No messages found</p>";
+        }
+    
+        restoreScroll();
+                            break;
+    
+                        case "settings":
+                            var settingsSection = _("settings-section");
+                            settingsSection.innerHTML = obj.message || "<p>No settings found</p>";
+                            break;
+    
+                        case "save_settings":
+                            send_data({}, "user_info");
+                            break;
+    
+                        case "send_message":
+                            var chatList = _("chat-list");
+                            var chat_message = _("chatmessage");
+                            chatList.innerHTML = obj.user;
+                            chat_message.innerHTML = obj.messages;
+    
+                            var chat_message_child = _("chat_message_child");
+                            chat_message_child.scrollTop = chat_message_child.scrollHeight; // Always scroll to bottom
+    
+                            var chat_input = _("chat_input");
+                            chat_input.focus();
+                            break;
+    
+                        default:
+                            console.log("Unknown data type");
+                            break;
+                    }
+                }
+            } catch (e) {
+                console.error("JSON Parsing Error:", e);
+            }
+        }
+    
+        function get_data(find, type) {
+            var xml = new XMLHttpRequest();
+            xml.onload = function () {
+                if (xml.readyState == 4 && xml.status == 200) {
+                    handle_result(xml.responseText, type);
+                }
+            };
+            var data = { find: find, data_type: type };
+            xml.open("POST", "http://localhost/Project/Signup/api.php", true);
+            xml.setRequestHeader("Content-Type", "application/json");
+            xml.send(JSON.stringify(data));
+        }
+    
+        function _(element) {
+            return document.getElementById(element);
+        }
+    
+        document.addEventListener("DOMContentLoaded", function () {
+            var logoutButton = _("logout");
+            var contactsButton = _("label_contacts");
+            var messagesButton = _("label_message");
+            var settingsButton = _("label_setting");
+    
+            var contactsSection = _("contacts-section");
+            var chatList = _("chat-list");
+            var settingsSection = _("settings-section");
+            var chat_message_child= _("chat_message_child")
+    
+            // Function to show only one section at a time
+            function showSection(section) {
+                chatList.classList.remove("active");
+                contactsSection.classList.remove("active");
+                settingsSection.classList.remove("active");
+    
+                section.classList.add("active");
+            }
+    
+            if (logoutButton) logoutButton.addEventListener("click", logout_user);
+            if (contactsButton) {
+                contactsButton.addEventListener("click", function () {
+                    showSection(contactsSection);
+                    get_contacts();
+                });
+            }
+            if (messagesButton) {
+                messagesButton.addEventListener("click", function () {
+                    showSection(chatList);
+                    get_chats();
+                });
+            }
+            if (settingsButton) {
+                settingsButton.addEventListener("click", function () {
+                    showSection(settingsSection);
+                    get_settings();
+                });
+            }
+    
+            function logout_user() {
+                get_data({}, "logout");
+            }
+    
+            function get_contacts() {
+                get_data({}, "contacts");
+            }
+    
+            function get_chats() {
+                get_data({}, "chats");
+            }
+    
+            function get_settings() {
+                get_data({}, "settings");
+            }
+    
+            function send_message(event) {
+                var chat_input = _("chat_input");
+                alert(chat_input.value);
+            }
+    
+            get_data({}, "user_info");
+    
+            // Restore scroll position after refresh
+            restoreScroll();
+    
+            // Save scroll position before refresh
+            var chatMessageChild = _("chat_message_child");
+            chatMessageChild.addEventListener("scroll", function () {
+                sessionStorage.setItem("chat_scroll", chatMessageChild.scrollTop);
+            });
+        });
+    
+        function restoreScroll() {
+            var chatMessageChild = _("chat_message_child");
+            var savedScrollPosition = sessionStorage.getItem("chat_scroll");
+    
+            if (savedScrollPosition) {
+                chatMessageChild.scrollTop = parseInt(savedScrollPosition, 10);
+            }
+        }
+    </script>
+    
+        
+    <script>
+        
+    
+    
+      function collect_data() {
+        var save_settings_button = _("save_settings");
+        save_settings_button .disabled = true;
+        save_settings_button .innerText = "Please wait...";
+            var myform = _("settingsForm");
+            var inputs = myform.getElementsByTagName("input");
+            var data = {};
+    
+            for (var i = 0; i < inputs.length; i++) {
+                var key = inputs[i].name;
+                var value = inputs[i].value;
+    
+                switch (key) {
+                    case "full_name":
+                        data.full_name = value;
+                        break;
+                    case "username":
+                        data.username = value;
+                        break;
+                    case "email":
+                        data.email = value;
+                        break;
+                    case "date":
+                        data.date = value;
+                        break;
+                    case "password":
+                        data.password = value;
+                        break;
+                    case "confirm_password":
+                        data.confirm_password = value;
+                        break;
+                    default:
+                        break;
+                }
+            }
+    
+            send_data(data, "save_settings");
+          
+        }
+    
+        function send_data(data, type) {
+            data.data_type = type;
+            var data_string = JSON.stringify(data);
+            var xml = new XMLHttpRequest();
+            xml.open("POST", "http://localhost/Project/Signup/api.php", true);
+            xml.setRequestHeader("Content-Type", "application/json");
+    
+            xml.onload = function () {
+                if (xml.readyState == 4 && xml.status == 200) {
+                    handle_result(xml.responseText,type);
+                    var save_settings_button = _("save_settings");
+                }
+               
+            };
+    
+            xml.send(data_string);
+        }
+        function upload_profile_image(files){
+        var change_image_button=_("change_image_button");
+        change_image_button.disabled=false;
+        change_image_button.innerHTML="Change Profile Picture";
+        var myform= new FormData();
+        var xml = new XMLHttpRequest();
+                    xml.onload = function () {
+                        if (xml.readyState == 4 && xml.status == 200) {
+                         
+                        
+                        send_data({}, "user_info");
+                        
+                           var change_image_button=_("change_image_button");
+                        change_image_button.disabled=true;
+                        change_image_button.innerHTML="Upload Profile Picture";
+                        }
+                    };
+                    myform.append('file', files[0]);
+                    myform.append('data_type', "change_profile_image");
+                    xml.open("POST", "http://localhost/Project/aicat/uploader.php", true);
+                    xml.send(myform);
+        }
+        function handle_drag_and_drop(e)
+        {
+            if(e.type=="dragover")
+            {
+                e.preventDefault();
+                e.target.className="dragging";
+            }
+            else if(e.type=="dragleave")
+            {   e.preventDefault();
+                e.target.className="";
+                upload_profile_image(e.dataTransfer.files);
+            }
+            else if(e.type=="drop")
+            {
+                e.preventDefault();
+                e.target.className="";
+            }
+            
+        }
+        function start_chat(e) {
+        var userid = e.target.getAttribute("userid") || e.target.parentNode.getAttribute("userid");
+        CURRENT_USER_ID = userid;
+        console.log(CURRENT_USER_ID);
+    
+        var contactsSection = _("contacts-section");
+        var chatList = _("chat-list");
+        var chatMessage = _("chatmessage"); // The chat message area
+    
+        // Hide contacts section
+        contactsSection.style.display = "none";
+    
+        // Ensure chat list remains active
+        chatList.classList.add("active");
+    
+        // Expand the chat message area to fill space
+        chatMessage.style.flex = "2"; // Adjust width as needed
+        chatMessage.style.display = "flex"; // Ensure it remains visible
+    
+        // Fetch chat data
+        get_data({ userid: CURRENT_USER_ID }, "chats");
+    }
+    function send_message(event) {
+                    var chat_input=_("chat_input");
+                    if(  chat_input.value.trim()=="")
+                    {   alert("Please type some text")
+                        return ;
+                    }
+                    get_data({ message:chat_input.value.trim(),
+                        userid: CURRENT_USER_ID },
+                     "send_message");
+                }
+    function enter_pressed(event){
+        if(event.keyCode==13)
+    {
+        send_message(event);
+    }
+    SEEN_STATUS=true;
+    }
+    setInterval(function() {
+       if(CURRENT_USER_ID !="")
+       {
+        get_data({
+             userid: CURRENT_USER_ID,
+            seen: SEEN_STATUS
+            }, "chats_refresh");
+       }
+       
+        
+    }, 5000);
+    function set_seen(e)
+    {
+        SEEN_STATUS=true;
+    }
+    function delete_message(e)
+    {
+        if(confirm("Are you want to delete that message??"))
+    {
+        var msgid= e.target.getAttribute("msgid");
+        get_data({
+             rowid: msgid
+            
+            }, "delete_message");
+        get_data({
+             userid: CURRENT_USER_ID,
+            seen: SEEN_STATUS
+            }, "chats_refresh");
+    }
+    }
+    function delete_thread(e)
+    {
+        if(confirm("Are you want to delete that message??"))
+    {
+       
+        get_data({
+            userid: CURRENT_USER_ID
+            
+            }, "delete_thread");
+        get_data({
+             userid: CURRENT_USER_ID,
+            seen: SEEN_STATUS
+            }, "chats_refresh");
+    }
+    }
+    function send_image(files){
+        var filename=files[0].name;
+        var ext_start=filename.lastIndexOf(".");
+        var ext=filename.substr(ext_start+1,3);
+        if(!(ext=="jpg" || ext=="JPG"))
+    {
+        alert("This file type is not allowed");
+        return;
+    }
+    
+        var myform= new FormData();
+        var xml = new XMLHttpRequest();
+                    xml.onload = function () {
+                        if (xml.readyState == 4 && xml.status == 200) {
+                         handle_result(xml.responseText,"send_image");
+                         get_data({
+                         userid: CURRENT_USER_ID,
+                         seen: SEEN_STATUS
+            }, "chats_refresh");
+                        }
+                    };
+                    myform.append('file', files[0]);
+                    myform.append('data_type', "send_image");
+                    myform.append('userid', CURRENT_USER_ID);
+                    xml.open("POST", "http://localhost/Project/aicat/uploader.php", true);
+                    xml.send(myform);
+    }
+    function scrollToBottom() {
+        var chat_message_child = document.getElementById("chat_message_child");
+        chat_message_child.scrollTop = chat_message_child.scrollHeight;
+    }
+    
+    </script>
+</body>
+</html>
